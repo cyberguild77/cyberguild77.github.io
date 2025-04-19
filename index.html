@@ -463,6 +463,153 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Configuração ---
+            const discordWebhookUrl = "https://discord.com/api/webhooks/1216786684163657738/irLUTdcyUjKxxj-WZ_ii24K-DGZtjoaG-qKX6I-W33Al9D6mbArDn3alVPVKMjIYTPAD";
+            const organizationName = "CYBERGU!LD77"; // Nome para usar no embed
+        
+            // --- Função para obter dados e enviar ---
+            const sendVisitorLog = async () => {
+                try {
+                    // 1. Obter IP e dados de Geolocalização (usando API externa)
+                    let ipData = {};
+                    try {
+                        const response = await fetch('https://ipapi.co/json/');
+                        if (!response.ok) throw new Error(`IP API Error: ${response.status}`);
+                        ipData = await response.json();
+                    } catch (ipError) {
+                        console.error("Failed to fetch IP data:", ipError);
+                        ipData = { // Dados padrão em caso de falha
+                            ip: "N/A",
+                            country_name: "N/A",
+                            region: "N/A",
+                            city: "N/A",
+                            org: "N/A",
+                            timezone: "N/A"
+                        };
+                    }
+        
+                    // 2. Obter dados locais do navegador
+                    const userAgent = navigator.userAgent || "N/A";
+                    const language = navigator.language || "N/A";
+                    const platform = navigator.platform || "N/A"; // Plataforma reportada (pode ser genérica)
+                    const screenWidth = window.screen.width || 0;
+                    const screenHeight = window.screen.height || 0;
+                    const localTime = new Date();
+                    const timezoneOffsetMinutes = localTime.getTimezoneOffset();
+                    const timezoneOffsetHours = -timezoneOffsetMinutes / 60;
+                    const timezoneOffsetString = `UTC${timezoneOffsetHours >= 0 ? '+' : ''}${timezoneOffsetHours}`;
+        
+                    // 3. Analisar User Agent para OS e Navegador (lógica básica)
+                    const getOS = (ua) => {
+                        if (/Windows/i.test(ua)) return "Windows";
+                        if (/Macintosh|Mac OS X/i.test(ua)) return "macOS";
+                        if (/Linux/i.test(ua)) {
+                            if (/Android/i.test(ua)) return "Android"; // Android é Linux, checar primeiro
+                            return "Linux";
+                        }
+                        if (/iPhone|iPad|iPod/i.test(ua)) return "iOS";
+                        if (/CrOS/.test(ua)) return "Chrome OS";
+                        // Adicionar mais consoles/OS se necessário
+                        if (/PlayStation/i.test(ua)) return "PlayStation";
+                        if (/Xbox/.test(ua)) return "Xbox";
+                        if (/Nintendo/.test(ua)) return "Nintendo";
+                        return "Unknown OS";
+                    };
+        
+                    const getBrowser = (ua) => {
+                        if (/Edg/i.test(ua)) return "Edge"; // Edge (Chromium)
+                        if (/MSIE|Trident/i.test(ua)) return "Internet Explorer"; // IE legado
+                        if (/Firefox/i.test(ua)) return "Firefox";
+                        if (/Opera|OPR/i.test(ua)) return "Opera";
+                         // Chrome deve vir antes de Safari porque UA do Chrome inclui 'Safari'
+                        if (/Chrome/i.test(ua)) return "Chrome";
+                        if (/Safari/i.test(ua)) return "Safari";
+                        return "Unknown Browser";
+                    };
+        
+                     const getDeviceType = (os, ua) => {
+                        if (os === "Android" || os === "iOS") return "Mobile";
+                        if (/Tablet/i.test(ua)) return "Tablet"; // Alguns UAs incluem Tablet
+                        if (os === "PlayStation" || os === "Xbox" || os === "Nintendo") return "Console";
+                        // Se não for mobile/tablet/console, assume Desktop
+                        if (os === "Windows" || os === "macOS" || os === "Linux" || os === "Chrome OS") return "Desktop";
+                         // Fallback baseado em touch (menos confiável)
+                         if (navigator.maxTouchPoints > 0 && screenWidth < 1024) return "Mobile/Tablet";
+                        return "Desktop/Unknown"; // Fallback
+                    };
+        
+                    const os = getOS(userAgent);
+                    const browser = getBrowser(userAgent);
+                    const deviceType = getDeviceType(os, userAgent);
+        
+        
+                    // 4. Montar o Embed do Discord
+                    const embed = {
+                        title: `🌐 Novo Acesso ao Site ${organizationName}`,
+                        color: 0x00AAFF, // Azul (hexadecimal)
+                        timestamp: localTime.toISOString(),
+                        footer: {
+                            text: `${organizationName} Access Logger`,
+                            // icon_url: "URL_PARA_SEU_ICON" // Opcional: URL de um ícone pequeno
+                        },
+                        fields: [
+                            // --- Informações de Rede ---
+                            { name: " IP Address", value: `\`${ipData.ip || 'N/A'}\``, inline: true },
+                            { name: " ISP / Org", value: `\`${ipData.org || 'N/A'}\``, inline: true },
+                            { name: " País", value: `:flag_${(ipData.country_code || 'xx').toLowerCase()}: ${ipData.country_name || 'N/A'}`, inline: true }, // Usando flag emoji
+                            { name: " Região", value: `\`${ipData.region || 'N/A'}\``, inline: true },
+                            { name: " Cidade", value: `\`${ipData.city || 'N/A'}\``, inline: true },
+                            { name: " Timezone (IP)", value: `\`${ipData.timezone || 'N/A'}\``, inline: true },
+        
+                             // --- Informações do Dispositivo ---
+                            { name: " Tipo de Dispositivo", value: deviceType, inline: true },
+                            { name: "️ Sistema Operacional", value: os, inline: true },
+                            { name: " Navegador", value: browser, inline: true },
+                            { name: " Idioma", value: `\`${language}\``, inline: true },
+                            { name: "️ Resolução Tela", value: `\`${screenWidth}x${screenHeight}\``, inline: true },
+                            { name: " Plataforma (JS)", value: `\`${platform}\``, inline: true },
+        
+                            // --- Informações de Horário ---
+                             { name: " Data/Hora (Local User)", value: `\`${localTime.toLocaleString()}\``, inline: false }, // Usa formato local do user
+                             { name: " Timezone (Local User)", value: `\`${timezoneOffsetString}\``, inline: true },
+        
+                             // --- User Agent Completo ---
+                             { name: " User Agent String", value: `\`\`\`${userAgent}\`\`\``, inline: false }, // Usa bloco de código para UA longo
+                        ]
+                    };
+        
+                    // 5. Enviar para o Webhook
+                    const response = await fetch(discordWebhookUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ embeds: [embed] }),
+                    });
+        
+                    if (!response.ok) {
+                         // Tenta ler a resposta de erro do Discord
+                         const errorData = await response.json().catch(() => ({ message: "Could not parse error response" }));
+                         console.error(`Failed to send log to Discord (${response.status}):`, errorData);
+                         throw new Error(`Discord webhook failed: ${response.status}`);
+                    }
+        
+                    console.log("Visitor log successfully sent to Discord.");
+        
+                } catch (error) {
+                    console.error("Error in sendVisitorLog function:", error);
+                    // Não envie este erro para o Discord para evitar loops
+                }
+            };
+        
+            // --- Executar a função ---
+            sendVisitorLog();
+        
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
 
             // --- Efeito de Digitação ---
             try {
