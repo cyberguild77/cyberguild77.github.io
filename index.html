@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CYBERGU!LD77 - Organização Anônima focada em Tecnologia, Hacking, Suporte e Desenvolvimento.">
+    <meta name="keywords" content="CYBERGUILD77, CYG77, Hacking, Tecnologia, Segurança, Desenvolvimento, Comunidade, Anônimo">
+    <title>CYBERGU!LD77</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset Básico e Configurações Globais */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f; /* Fundo principal quase preto */
+            --bg-secondary: #1a1a2e; /* Fundo secundário levemente azulado/roxo escuro */
+            --text-primary: #e0e0e0; /* Texto principal claro */
+            --text-secondary: #a0a0c0; /* Texto secundário mais suave */
+            --accent-primary: #00aaff; /* Azul vibrante */
+            --accent-secondary: #9f70fd; /* Roxo complementar */
+            --border-color: rgba(0, 170, 255, 0.2); /* Cor da borda sutil */
+            --glow-color: rgba(0, 170, 255, 0.5); /* Cor do brilho */
+
+            --font-heading: 'Orbitron', sans-serif; /* Fonte futurista para títulos */
+            --font-body: 'Roboto', sans-serif; /* Fonte limpa para corpo */
+            --font-code: 'Source Code Pro', monospace; /* Fonte monoespaçada */
+
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden; /* Prevenir scroll horizontal */
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0),
+                /* linear-gradient(rgba(10, 10, 15, 0.95), rgba(10, 10, 15, 1)), */
+                radial-gradient(ellipse at bottom left, var(--bg-secondary), transparent 50%),
+                radial-gradient(ellipse at top right, var(--accent-secondary), transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 80px 0 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before { /* Efeito de grade sutil no header */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(var(--border-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.1;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: clamp(2.5rem, 8vw, 4.5rem); /* Tamanho responsivo */
+            color: var(--text-primary);
+            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            position: relative; /* Para z-index */
+            z-index: 1;
+        }
+
+        .logo .highlight {
+            color: var(--accent-primary);
+            /* font-weight: 700; */ /* Orbitron já é bold */
+        }
+
+        .tagline {
+            font-family: var(--font-code);
+            font-size: clamp(1rem, 3vw, 1.3rem);
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            position: relative; /* Para z-index */
+            z-index: 1;
+        }
+
+        /* Efeito de Digitação */
+        .typed-cursor {
+            color: var(--accent-primary);
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Seções */
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+            opacity: 0; /* Inicialmente invisível para animação */
+            transform: translateY(30px); /* Deslocado para animação */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            color: var(--accent-primary);
+            text-align: center;
+            margin-bottom: 40px;
+            text-shadow: 0 0 8px var(--glow-color);
+            position: relative;
+        }
+
+        h2::after { /* Linha decorativa abaixo do título */
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-primary);
+            margin: 15px auto 0;
+            border-radius: 2px;
+            box-shadow: 0 0 8px var(--glow-color);
+        }
+
+        /* Conteúdo das Seções */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .content-box {
+            background-color: rgba(26, 26, 46, 0.7); /* bg-secondary com alpha */
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .content-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 170, 255, 0.2);
+        }
+
+        h3 {
+            font-family: var(--font-heading);
+            color: var(--accent-secondary);
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        ul li::before { /* Marcador customizado */
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--accent-primary);
+            font-family: var(--font-code);
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        a:hover {
+            color: #fff;
+            text-shadow: 0 0 5px var(--glow-color);
+        }
+
+        /* Seção de Skills */
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .skills-container img {
+            transition: transform 0.3s ease;
+            /* height: 30px !important; /* Força altura para badges */
+        }
+
+        .skills-container img:hover {
+            transform: scale(1.1);
+        }
+
+        /* Seção de Links e Contato */
+        .links-container, .stats-container {
+            text-align: center;
+        }
+
+        .stats-container img {
+            margin: 5px;
+            vertical-align: middle; /* Alinha melhor os badges */
+        }
+
+        /* Botão de Ação (Join) */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0, 170, 255, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 170, 255, 0.5);
+            background: linear-gradient(45deg, var(--accent-secondary), var(--accent-primary));
+            color: #fff; /* Garante que a cor do texto não mude */
+            text-shadow: none; /* Remove text-shadow padrão do link hover */
+        }
+
+        /* Seção de Declaração (Opcional, talvez um modal?) */
+        /* Para este exemplo, apenas texto */
+        #declaration p {
+            font-size: 0.9rem;
+            font-style: italic;
+            text-align: center;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 40px; /* Espaço acima do footer */
+        }
+
+        footer .final-statement {
+            font-family: var(--font-code);
+            color: var(--accent-primary);
+            margin-bottom: 10px;
+            display: block; /* Garante que fique em linha própria */
+        }
+
+        /* Animação de Fundo Sutil (Opcional) */
+        /* @keyframes subtle-gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        body {
+            background: linear-gradient(-45deg, var(--bg-primary), var(--bg-secondary), var(--bg-primary), #2a2a3e);
+            background-size: 400% 400%;
+            animation: subtle-gradient 15s ease infinite;
+        } */
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr; /* Coluna única em telas menores */
+            }
+
+            h2 {
+                font-size: clamp(1.6rem, 6vw, 2rem);
+            }
+
+            .logo {
+                font-size: clamp(2rem, 10vw, 3rem);
+            }
+
+            .tagline {
+                 font-size: clamp(0.9rem, 4vw, 1.1rem);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <h1 class="logo">CYBERGU<span class="highlight">!</span>LD<span class="highlight">77</span></h1>
+            <!-- Elemento onde o efeito de digitação acontecerá -->
+            <p class="tagline"><span id="typed-tagline"></span></p>
+            <div class="stats-container">
+                <!-- Badges de Stats do GitHub (usando Shields.io como no exemplo) -->
+                <a href="https://github.com/CYBERGUILD77" target="_blank" rel="noopener noreferrer">
+                    <img height="25" src="https://api.visitorbadge.io/api/VisitorHit?user=CYBERGUILD77&countColor=%2300AAFF&label=PROFILE%20VIEWS&labelColor=%231A1A2E&style=for-the-badge" alt="Profile Views"/>
+                </a>
+                <a href="https://github.com/CYBERGUILD77?tab=followers" target="_blank" rel="noopener noreferrer">
+                    <img height="25" src="https://img.shields.io/github/followers/CYBERGUILD77?color=9f70fd&style=for-the-badge&logo=github&label=Followers&labelColor=1a1a2e" alt="Followers"/>
+                </a>
+                <a href="https://github.com/CYBERGUILD77?tab=stars" target="_blank" rel="noopener noreferrer">
+                    <img height="25" src="https://img.shields.io/github/stars/CYBERGUILD77?color=00aaff&style=for-the-badge&logo=github&label=Stars&labelColor=1a1a2e" alt="Stars"/>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Seção Sobre Nós -->
+        <section id="about" class="scroll-animate">
+            <h2><span class="highlight">🏴‍☠️</span> Sobre Nós</h2>
+            <p style="text-align: center; max-width: 700px; margin: -20px auto 40px auto; color: var(--text-primary);">
+                <strong>CYBERGU!LD (CYG77)</strong> é uma organização anônima focada em tecnologia, hacking, suporte e desenvolvimento. Nosso objetivo é ajudar os próximos, promovendo o conhecimento e compartilhamento de informações sem restrições.
+            </p>
+            <div class="content-grid">
+                <div class="content-box">
+                    <h3><span class="highlight">🎭</span> Anonimato e Liberdade</h3>
+                    <p>Valorizamos a privacidade e a livre troca de conhecimento. Acreditamos que a informação deve ser acessível a todos que a buscam.</p>
+                </div>
+                <div class="content-box">
+                    <h3><span class="highlight">⚡</span> Foco Tecnológico</h3>
+                    <p>Exploramos as fronteiras da segurança da informação, desenvolvimento de software e a vasta paisagem da tecnologia moderna.</p>
+                </div>
+                <div class="content-box">
+                    <h3><span class="highlight">🔥</span> Comunidade</h3>
+                    <p>Um coletivo de mentes inquietas, curiosas e apaixonadas por desvendar os mistérios do mundo digital.</p>
+                </div>
+            </div>
+            <p style="text-align: center; margin-top: 30px; font-family: var(--font-code); font-size: 1.1rem; color: var(--accent-secondary);">
+                "O conhecimento deve ser livre, e a curiosidade, infinita."
+            </p>
+        </section>
+
+        <!-- Seção Objetivos -->
+        <section id="objectives" class="scroll-animate">
+            <h2>Objetivos e Compromissos</h2>
+            <div class="content-box" style="max-width: 800px; margin: 0 auto;"> <!-- Caixa única para objetivos -->
+                <p>A <strong>CYG77</strong> busca:</p>
+                <ul>
+                    <li>Promover o compartilhamento de conhecimento em hacking e tecnologia.</li>
+                    <li>Fornecer suporte e aprendizado para membros interessados em cibersegurança.</li>
+                    <li>Criar projetos inovadores e contribuir para o avanço tecnológico.</li>
+                    <li>Manter um ambiente de respeito mútuo e colaboração anônima.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Seção Skills -->
+        <section id="skills" class="scroll-animate">
+            <h2><span class="highlight">🛠️</span> Skills & Tecnologias</h2>
+            <div class="skills-container">
+                <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
+                <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
+                <img src="https://img.shields.io/badge/Lua-2C2D72?style=for-the-badge&logo=lua&logoColor=white" alt="Lua">
+                <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white" alt="Node.js">
+                <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
+                <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
+                <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux">
+                <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+                <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white" alt="Git">
+                 <img src="https://img.shields.io/badge/Security-000000?style=for-the-badge&logo=hackthebox&logoColor=white" alt="Security">
+                <!-- Adicione mais badges conforme necessário -->
+            </div>
+        </section>
+
+        <!-- Seção Links -->
+        <section id="links" class="scroll-animate">
+            <h2><span class="highlight">🔗</span> Links</h2>
+            <div class="links-container">
+                <p>Conecte-se e explore mais:</p>
+                <a href="https://linktr.ee/CYBERGUILD" target="_blank" rel="noopener noreferrer" class="cta-button" style="margin: 5px;">Contato (Linktree)</a>
+                <a href="https://github.com/CYBERGUILD77" target="_blank" rel="noopener noreferrer" class="cta-button" style="background: #333; margin: 5px;">GitHub</a>
+                <!-- Link do site offline: pode ser comentado ou estilizado diferente -->
+                <!-- <a href="#" class="cta-button" style="background: #555; cursor: not-allowed; margin: 5px;" title="Atualmente Offline">Site Oficial [Offline]</a> -->
+                 <a href="LICENSE.md" target="_blank" rel="noopener noreferrer" class="cta-button" style="background: #444; margin: 5px;">Licença CYG77 v1.0</a>
+            </div>
+        </section>
+
+         <!-- Seção Join -->
+        <section id="join" class="scroll-animate">
+            <h2 align="center"><span class="highlight">⚔️</span> Junte-se à Guilda</h2>
+            <p align="center">Interessado em fazer parte? Entre em contato ou nos encontre nas sombras.</p>
+            <p align="center">
+                <a href="https://discord.com/users/904046446666469397" target="_blank" rel="noopener noreferrer" class="cta-button" style="background: #5865F2; /* Discord Blurple */ margin-top: 10px;">
+                    Contatar via Discord
+                </a>
+            </p>
+             <div id="github-repo-info" style="text-align: center; margin-top: 30px; font-family: var(--font-code); color: var(--text-secondary); font-size: 0.9rem;">
+                Carregando informações do Repositório GitHub...
+            </div>
+        </section>
+
+         <!-- Seção Declaração (Opcional) -->
+        <section id="declaration" class="scroll-animate">
+             <h2>Declaração Oficial</h2>
+             <p>
+                 <strong>CYBERGU!LD77</strong> é uma organização oficialmente reconhecida. Este espaço serve como referência pública de sua identidade. O nome <strong>CYBERGU!LD77</strong> e suas variantes são protegidos contra uso indevido. Qualquer tentativa de reivindicar a identidade da organização sem autorização será considerada fraudulenta.
+             </p>
+         </section>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <span class="final-statement">CYBERGU!LD77: As sombras estão observando.</span>
+            © 2024-<script>document.write(new Date().getFullYear())</script> CYBERGU!LD77 - Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Typed.js (CDN) para efeito de digitação -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Efeito de Digitação ---
+            try {
+                const typed = new Typed('#typed-tagline', {
+                    strings: [
+                        'Explorando as fronteiras digitais...',
+                        'O conhecimento deve ser livre...',
+                        'A curiosidade é infinita...',
+                        'Tecnologia. Hacking. Desenvolvimento.',
+                        'Bem-vindo à CYBERGU!LD77.'
+                    ],
+                    typeSpeed: 50,
+                    backSpeed: 25,
+                    backDelay: 1500,
+                    startDelay: 500,
+                    loop: true,
+                    smartBackspace: true,
+                    cursorChar: '_',
+                });
+            } catch (e) {
+                console.error("Typed.js initialization failed:", e);
+                // Fallback sem efeito de digitação
+                const taglineElement = document.getElementById('typed-tagline');
+                if (taglineElement) {
+                    taglineElement.textContent = 'Bem-vindo à CYBERGU!LD77.';
+                }
+            }
+
+
+            // --- Animação de Scroll (Intersection Observer API) ---
+            const sections = document.querySelectorAll('.scroll-animate');
+
+            const observerOptions = {
+                root: null, // viewport
+                rootMargin: '0px',
+                threshold: 0.15 // Trigger quando 15% da seção estiver visível
+            };
+
+            const observerCallback = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // Opcional: parar de observar depois que anima uma vez
+                        // observer.unobserve(entry.target);
+                    }
+                    // Opcional: remover a classe se sair da view (para animar novamente)
+                    // else {
+                    //     entry.target.classList.remove('visible');
+                    // }
+                });
+            };
+
+            const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+
+            // --- Exemplo de Fetch API (GitHub Repo Info) ---
+             const repoInfoDiv = document.getElementById('github-repo-info');
+             const githubUser = 'CYBERGUILD77'; // Usuário GitHub da organização
+
+             if (repoInfoDiv) {
+                 fetch(`https://api.github.com/users/${githubUser}/repos?sort=updated&per_page=3`)
+                     .then(response => {
+                         if (!response.ok) {
+                             throw new Error(`GitHub API Error: ${response.status}`);
+                         }
+                         return response.json();
+                     })
+                     .then(repos => {
+                         if (repos && repos.length > 0) {
+                             let html = 'Últimos Repositórios Atualizados:<br>';
+                             repos.forEach(repo => {
+                                 html += `<a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" style="margin: 0 5px;">${repo.name}</a> (Updated: ${new Date(repo.updated_at).toLocaleDateString()})<br>`;
+                             });
+                             repoInfoDiv.innerHTML = html;
+                         } else {
+                             repoInfoDiv.textContent = 'Nenhum repositório público encontrado ou API indisponível.';
+                         }
+                     })
+                     .catch(error => {
+                         console.error('Error fetching GitHub repo info:', error);
+                         repoInfoDiv.textContent = 'Erro ao carregar dados do GitHub.';
+                     });
+             }
+
+        });
+    </script>
+
+</body>
+</html>
