@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Licença e Declaração Oficial da CYBERGU!LD77.">
+    <title>CYBERGU!LD77 - Declaração Oficial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&family=Source+Code+Pro:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset Básico e Variáveis Globais (Consistentes com o site principal) */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #1a1a2e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0c0;
+            --accent-primary: #00aaff;
+            --accent-secondary: #9f70fd;
+            --border-color: rgba(0, 170, 255, 0.2);
+            --glow-color: rgba(0, 170, 255, 0.5);
+
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Roboto', sans-serif;
+            --font-code: 'Source Code Pro', monospace;
+
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8; /* Aumentar um pouco para leitura de texto longo */
+            overflow-x: hidden;
+            background-image: /* Fundo mais simples para a página de licença */
+                radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.03) 1px, transparent 0);
+            background-attachment: fixed;
+        }
+
+        /* Container Principal */
+        .container {
+            max-width: 800px; /* Largura mais adequada para texto */
+            margin: 40px auto; /* Espaçamento superior/inferior */
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho da Página de Licença */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .page-header h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 6vw, 3rem);
+            color: var(--accent-primary);
+            text-shadow: 0 0 8px var(--glow-color);
+            margin-bottom: 5px;
+        }
+
+        .page-header .subtitle {
+            font-family: var(--font-code);
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Conteúdo da Licença/Declaração */
+        .license-content {
+            background-color: rgba(26, 26, 46, 0.5); /* Fundo sutil */
+            padding: 30px 40px; /* Mais padding interno */
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        .license-content h2 {
+            font-family: var(--font-heading);
+            font-size: 1.6rem;
+            color: var(--accent-secondary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed var(--border-color); /* Separador de seção */
+        }
+        .license-content h2:first-of-type {
+             margin-top: 0; /* Remove margem do primeiro h2 */
+        }
+
+        .license-content h3 { /* Para itens como "Official Name" */
+            font-family: var(--font-code);
+            color: var(--text-primary);
+            font-size: 1rem;
+            margin-top: 20px;
+            margin-bottom: 5px;
+        }
+        .license-content h3 strong {
+            color: var(--accent-primary); /* Destaca o rótulo */
+            font-weight: 700;
+        }
+
+        .license-content p {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+
+        .license-content p strong { /* Destacar palavras importantes no texto */
+             color: var(--text-primary);
+             font-weight: 400; /* Roboto já tem peso, não precisa exagerar */
+        }
+
+        .license-content ul {
+            list-style: none;
+            padding-left: 10px; /* Pequeno recuo */
+            margin-bottom: 15px;
+        }
+
+        .license-content ul li {
+            margin-bottom: 10px;
+            padding-left: 25px; /* Espaço para o marcador */
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .license-content ul li::before { /* Marcador customizado '>' */
+            content: '>';
+            position: absolute;
+            left: 0;
+            top: 1px; /* Ajuste fino vertical */
+            color: var(--accent-primary);
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Link para voltar (Opcional) */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            font-family: var(--font-code);
+        }
+
+        .back-link a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            padding: 8px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .back-link a:hover {
+            background-color: var(--accent-primary);
+            color: var(--bg-primary);
+            box-shadow: 0 0 10px var(--glow-color);
+            border-color: var(--accent-primary);
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px auto;
+                padding: 0 15px;
+            }
+            .license-content {
+                padding: 20px;
+            }
+            .page-header h1 {
+                 font-size: clamp(1.8rem, 7vw, 2.5rem);
+            }
+             .license-content h2 {
+                font-size: 1.4rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="page-header">
+            <h1>Declaração Oficial</h1>
+            <p class="subtitle">// CYBERGU!LD77 //</p>
+        </header>
+
+        <article class="license-content">
+            <!-- Cole o conteúdo da sua declaração/licença aqui -->
+
+            <h3><strong>Official Name:</strong> CYBERGU!LD77</h3>
+            <p><strong>Alias:</strong> CYBERGU!LD, Cyberguild, CYBERGUILD77, CYBERGU!LD[77], CYG77</p>
+            <h3><strong>Date of Establishment:</strong> [01/02/2025 23:38 UTC+0]</h3>
+            <h3><strong>Focus:</strong> Technology, Hacking, Technical Support, Research and Development</h3>
+
+            <h2>Declaration of Existence</h2>
+            <p><strong>CYBERGU!LD77</strong> é uma organização oficialmente reconhecida dentro da comunidade de tecnologia e cibersegurança. Este documento serve como prova de sua existência e atua como referência pública para sua identidade.</p>
+
+            <h2>Name Protection</h2>
+            <p>O nome <strong>CYBERGU!LD77</strong> e suas variantes são protegidos contra uso indevido, plágio ou apropriação não autorizada por terceiros. Qualquer tentativa de reivindicar a identidade da organização sem autorização será considerada fraudulenta e inválida.</p>
+
+            <h2>Objectives and Commitments</h2>
+            <p><strong>CYG77</strong> é uma organização anônima com o objetivo de auxiliar outros, promover o conhecimento e fornecer suporte nos campos da tecnologia e hacking. Os principais objetivos incluem:</p>
+            <ul>
+                <li>Promover o compartilhamento de conhecimento em hacking e tecnologia;</li>
+                <li>Fornecer suporte e treinamento para membros interessados em cibersegurança;</li>
+                <li>Criar projetos inovadores e contribuir para o avanço tecnológico.</li>
+            </ul>
+
+            <h2>Final Statement</h2>
+            <p>Este documento estabelece oficialmente a <strong>CYBERGU!LD77</strong> como uma entidade ativa e reconhecida. Qualquer referência a este nome deve ser feita respeitosamente e em alinhamento com os princípios da comunidade.</p>
+
+            <!-- Fim do conteúdo da licença -->
+        </article>
+
+        <!-- Link opcional para voltar à página principal -->
+        <div class="back-link">
+            <!-- Substitua 'index.html' pelo nome real da sua página principal, se diferente -->
+            <a href="index.html">< Voltar para a Página Principal</a>
+        </div>
+
+    </div> <!-- Fim .container -->
+
+    <footer>
+        © 2024-<script>document.write(new Date().getFullYear())</script> CYBERGU!LD77 - Todos os direitos reservados.
+    </footer>
+
+    <!-- Nenhum JS específico necessário para esta página estática,
+         a menos que você queira adicionar funcionalidades como copiar texto. -->
+
+</body>
+</html>
