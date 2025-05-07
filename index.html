@@ -1071,25 +1071,13 @@
                     const method = document.getElementById('contact-method').value;
                     const details = document.getElementById('contact-details').value;
                     const message = document.getElementById('contact-message').value;
-
-                    // **IMPORTANTE: Substitua pela URL real do seu Webhook do Discord**
-                    const WEBHOOK_URL = "https://discord.com/api/webhooks/1369684012074930226/V4Ugdee6UGT3k2HzM5SjY4bIoi20lFef5f1ZeeHnQh_4uAPxP7qSg72tcMHChaCBtbWI";
-
-                    if (WEBHOOK_URL === "https://discord.com/api/webhooks/1369684012074930226/V4Ugdee6UGT3k2HzM5SjY4bIoi20lFef5f1ZeeHnQh_4uAPxP7qSg72tcMHChaCBtbWI") {
-                        console.error("ERRO: URL do Webhook não configurada!");
-                        alert("Erro na configuração do formulário. Contate o administrador.");
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                        return;
-                    }
-
-                    // Crie o payload do embed para o Discord
+                    const WEBHOOK_URL = "https://discord.com/api/webhooks/1369720741855236257/QWK8VbTtyeqmwexgAS6SJkGf1MNy0wrmecXn-jAO1P-Sqdhi5NxlNHNQf5RA573OL2XK";
                     const discordPayload = {
-                        username: "CYG77 Contact Bot", // Nome que aparecerá como remetente no Discord
-                        avatar_url: "https://avatars.githubusercontent.com/u/197331981?v=4", // URL do avatar do bot
+                        username: "CYG77 Contact Bot",
+                        avatar_url: "https://avatars.githubusercontent.com/u/197331981?v=4",
                         embeds: [{
                             title: "📬 Novo Contato Recebido",
-                            color: 0x00AAFF, // Cor hexadecimal (azul cyber)
+                            color: 0x00AAFF,
                             description: `Uma nova mensagem foi enviada através do formulário de contato do site.`,
                             fields: [
                                 { name: "👤 Nome/Identificador", value: `\`\`\`${name}\`\`\``, inline: true },
@@ -1100,7 +1088,7 @@
                             timestamp: new Date().toISOString(),
                             footer: {
                                 text: "Formulário de Contato CYBERGU!LD77",
-                                icon_url: "https://avatars.githubusercontent.com/u/197331981?v=4" // Ícone do rodapé
+                                icon_url: "https://avatars.githubusercontent.com/u/197331981?v=4"
                             }
                         }]
                     };
@@ -1118,14 +1106,16 @@
                             submitBtn.innerHTML = '<i class="fas fa-check mr-2"></i> Mensagem Enviada!';
                             console.log("Contato enviado para o Discord com sucesso!");
                             setTimeout(() => {
-                                contactModal.classList.remove('active');
+                                // Supondo que contactModal está definido globalmente ou no escopo acessível
+                                if (typeof contactModal !== 'undefined' && contactModal) {
+                                    contactModal.classList.remove('active');
+                                }
                                 document.body.style.overflow = '';
                                 submitBtn.innerHTML = originalText;
                                 submitBtn.disabled = false;
                                 contactForm.reset();
                             }, 2500);
                         } else {
-                            // Tenta ler a resposta de erro do Discord
                             const errorData = await response.json().catch(() => ({ message: "Não foi possível obter detalhes do erro do Discord." }));
                             console.error(`Falha ao enviar para o Discord (${response.status}):`, errorData);
                             alert(`Erro ao enviar mensagem: ${errorData.message || response.statusText}. Tente novamente mais tarde.`);
